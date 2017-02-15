@@ -107,14 +107,16 @@ endfunc
 
 " TODO: Allow a different 'make' executable to be used.
 function! cmake#util#run_make(command)
-  let l:command = 'make -C ' . cmake#util#binary_dir() . ' ' . a:command
-  return cmake#util#shell_exec(l:command)
+  exec 'AsyncRun make -C ' . cmake#util#binary_dir() . ' ' . a:command
+  "let l:command = 'make -C ' . cmake#util#binary_dir() . ' ' . a:command
+  "return cmake#util#shell_exec(l:command)
 endfunc
 
 " TODO: Allow a different 'cmake' executable to be used.
 function! cmake#util#run_cmake(command)
-  let l:command = 'cmake ' . a:command
-  return cmake#util#shell_exec(l:command)
+  exec 'AsyncRun cmake' . a:command . ' -- -j8'
+  "let l:command = 'cmake ' . a:command
+  "return cmake#util#shell_exec(l:command)
 endfunc
 
 function! cmake#util#shell_exec(command)
